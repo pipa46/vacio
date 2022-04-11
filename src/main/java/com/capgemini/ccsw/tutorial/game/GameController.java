@@ -16,8 +16,8 @@ import com.capgemini.ccsw.tutorial.game.model.GameDto;
 import com.devonfw.module.beanmapping.common.api.BeanMapper;
 
 /**
-* @author ccsw
-*/
+ * @author ccsw
+ */
 @RequestMapping(value = "/game")
 @RestController
 @CrossOrigin(origins = "*")
@@ -28,26 +28,19 @@ public class GameController {
 
     @Autowired
     BeanMapper beanMapper;
-    
+
     @RequestMapping(path = "", method = RequestMethod.GET)
     public List<GameDto> find(@RequestParam(value = "title", required = false) String title,
-            @RequestParam(value = "idCategory", required = false) Long idCategory)
-    {
+            @RequestParam(value = "idCategory", required = false) Long idCategory) {
 
         List<Game> games = gameService.find(title, idCategory);
 
         return beanMapper.mapList(games, GameDto.class);
     }
-     
-   
-    
-    
 
     @RequestMapping(path = { "", "/{id}" }, method = RequestMethod.PUT)
-    public void save(@PathVariable(name = "id", required = false) Long id, @RequestBody GameDto dto)
-    {
-
+    public void save(@PathVariable(name = "id", required = false) Long id, @RequestBody GameDto dto) {
         gameService.save(id, dto);
     }
-   
+
 }
