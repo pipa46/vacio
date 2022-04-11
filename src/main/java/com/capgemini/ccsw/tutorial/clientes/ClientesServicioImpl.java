@@ -11,11 +11,11 @@ import com.capgemini.ccsw.tutorial.clientes.model.ClientesDto;
 @Service
 public class ClientesServicioImpl implements ClientesService {
     @Autowired
-    ClientesRepository cr;
+    ClientesRepository clientesRepository;
 
     @Override
     public List<Clientes> findAll() {
-        return (List<Clientes>) this.cr.findAll();
+        return (List<Clientes>) this.clientesRepository.findAll();
     }
 
     @Override
@@ -34,18 +34,18 @@ public class ClientesServicioImpl implements ClientesService {
         clientess.setNombre(dto.getNombre());
 
         if (!clientes.stream().anyMatch(cliente -> cliente.getNombre().equals(dto.getNombre())))
-            this.cr.save(clientess);
+            this.clientesRepository.save(clientess);
 
     }
 
     @Override
     public void delete(Long id) {
-        this.cr.deleteById(id);
+        this.clientesRepository.deleteById(id);
     }
 
     @Override
     public Clientes get(Long id) {
-        return this.cr.findById(id).orElse(null);
+        return this.clientesRepository.findById(id).orElse(null);
     }
 
 }
